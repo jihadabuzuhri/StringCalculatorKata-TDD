@@ -57,5 +57,15 @@ namespace StringCalculatorKataSolution
         }
 
 
+        [Theory]
+        [InlineData("//,\n2,4,1", 7)]
+        [InlineData("//;\n1;2", 3)]
+        public void ReturnsSumOfNumberWithManySeparatedNumberWithDifferentDelimiters(string numbers, int expectedResult)
+        {
+            int result = StringCalculatorKata.Add(numbers);
+
+            Assert.Equal(expectedResult, result);
+        }
+        
     }
 }

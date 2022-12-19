@@ -2,11 +2,11 @@ using Xunit;
 
 namespace StringCalculatorKataSolution
 {
-    public class AddTest
+    public class CalculatorAddTest
     {
 
         [Fact]
-        public void EmptyStringTest()
+        public void ReturnZeroWithEmptyStringTest()
         {
             String InputString = "";
             
@@ -18,7 +18,7 @@ namespace StringCalculatorKataSolution
         [Theory]
         [InlineData("1",1)]
         [InlineData("2",2)]
-        public void ReturnsNumberWithOneNumber(string numbers, int expectedResult)
+        public void ReturnsNumberWithOneNumberTest(string numbers, int expectedResult)
         {
             int result = StringCalculatorKata.Add(numbers);
 
@@ -28,7 +28,7 @@ namespace StringCalculatorKataSolution
         [Theory]
         [InlineData("1,2", 3)]
         [InlineData("2,4", 6)]
-        public void ReturnsSumOfNumberWithTwoCommaSeparatedNumber(string numbers, int expectedResult)
+        public void ReturnsSumOfNumberWithTwoCommaSeparatedNumberTest(string numbers, int expectedResult)
         {
             int result = StringCalculatorKata.Add(numbers);
 
@@ -38,7 +38,7 @@ namespace StringCalculatorKataSolution
         [Theory]
         [InlineData("1,2,4", 7)]
         [InlineData("2,4,5,7", 18)]
-        public void ReturnsSumOfNumberWithManyCommaSeparatedNumber(string numbers, int expectedResult)
+        public void ReturnsSumOfNumberWithManyCommaSeparatedNumberTest(string numbers, int expectedResult)
         {
             int result = StringCalculatorKata.Add(numbers);
 
@@ -49,7 +49,7 @@ namespace StringCalculatorKataSolution
         [Theory]
         [InlineData("1\n2,4", 7)]
         [InlineData("2,4\n5\n7", 18)]
-        public void ReturnsSumOfNumberWithManyCommaOrNewLinesSeparatedNumber(string numbers, int expectedResult)
+        public void ReturnsSumOfNumberWithManyCommaOrNewLinesSeparatedNumberTest(string numbers, int expectedResult)
         {
             int result = StringCalculatorKata.Add(numbers);
 
@@ -60,12 +60,28 @@ namespace StringCalculatorKataSolution
         [Theory]
         [InlineData("//,\n2,4,1", 7)]
         [InlineData("//;\n1;2", 3)]
-        public void ReturnsSumOfNumberWithManySeparatedNumberWithDifferentDelimiters(string numbers, int expectedResult)
+        public void ReturnsSumOfNumberWithManySeparatedNumberWithDifferentDelimitersTest(string numbers, int expectedResult)
         {
             int result = StringCalculatorKata.Add(numbers);
 
             Assert.Equal(expectedResult, result);
         }
-        
+         
+        [Theory]
+        [InlineData("-4,8,7", "Negatives not allowed: -4")]
+        [InlineData("-21,-32", "Negatives not allowed: -21,-32")]
+        public void ThrowsGivenNegativeInputsTest(string numbers, string expectedMessage)
+        {
+
+            Action action = () => StringCalculatorKata.Add(numbers);
+
+            var exception = Assert.Throws<Exception>(action);
+
+            Assert.Equal(expectedMessage, exception.Message);
+
+        }
+
+
+
     }
 }

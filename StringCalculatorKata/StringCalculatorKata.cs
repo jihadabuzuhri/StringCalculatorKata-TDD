@@ -47,7 +47,7 @@
 
 
 
-            return NumbersList.Sum();
+            return NumbersList.Where(num => num <= 1000).Sum();
 
 
         }

@@ -28,7 +28,7 @@ namespace StringCalculatorKataSolution
         [Theory]
         [InlineData("1,2", 3)]
         [InlineData("2,4", 6)]
-        public void ReturnsNumberWithTwoCommaSeparatedNumber(string numbers, int expectedResult)
+        public void ReturnsSumOfNumberWithTwoCommaSeparatedNumber(string numbers, int expectedResult)
         {
             int result = StringCalculatorKata.Add(numbers);
 
@@ -38,12 +38,24 @@ namespace StringCalculatorKataSolution
         [Theory]
         [InlineData("1,2,4", 7)]
         [InlineData("2,4,5,7", 18)]
-        public void ReturnsNumberWithManyCommaSeparatedNumber(string numbers, int expectedResult)
+        public void ReturnsSumOfNumberWithManyCommaSeparatedNumber(string numbers, int expectedResult)
         {
             int result = StringCalculatorKata.Add(numbers);
 
             Assert.Equal(expectedResult, result);
         }
+
+
+        [Theory]
+        [InlineData("1\n2,4", 7)]
+        [InlineData("2,4\n5\n7", 18)]
+        public void ReturnsSumOfNumberWithManyCommaOrNewLinesSeparatedNumber(string numbers, int expectedResult)
+        {
+            int result = StringCalculatorKata.Add(numbers);
+
+            Assert.Equal(expectedResult, result);
+        }
+
 
     }
 }
